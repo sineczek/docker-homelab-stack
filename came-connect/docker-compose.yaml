@@ -1,0 +1,12 @@
+services:
+  came-bridge:
+    image: came-connect:local
+    container_name: came_connect_bridge
+    restart: unless-stopped
+    ports:
+      - "9102:8080"
+    environment:
+      CAME_CONNECT_CLIENT_ID: ${CAME_CONNECT_CLIENT_ID}
+      CAME_CONNECT_CLIENT_SECRET: ${CAME_CONNECT_CLIENT_SECRET}
+      CAME_CONNECT_USERNAME: ${CAME_CONNECT_USERNAME}
+      CAME_CONNECT_PASSWORD: ${CAME_CONNECT_PASSWORD}

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  pihole:
+    container_name: ${PIHOLE_CONTAINER_NAME}
+    image: ${PIHOLE_IMAGE}
+    ports:
+      - "${PIHOLE_DNS_TCP_PORT}:53/tcp"
+      - "${PIHOLE_DNS_UDP_PORT}:53/udp"
+      - "${PIHOLE_WEB_PORT}:80/tcp"
+    networks:
+      pi_net:
+        ipv4_address: ${PIHOLE_IPV4_ADDRESS}
+      frontend:
+    environment:
+      TZ: ${PIHOLE_TZ}
+      WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+    volumes:
+      - './pihole/pihole:/etc/pihole'
+      - './pihole/dnsmasq.d:/etc/dnsmasq.d'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.EventHorizon-https.tls=true
+      - traefik.http.routers.EventHorizon-https.tls.certresolver=${TRAEFIK_CERTRESOLVER}
+      - traefik.http.routers.EventHorizon-https.entrypoints=websecure
+      - traefik.http.routers.EventHorizon-https.rule=Host(`${TRAEFIK_HOSTNAME}`)
+    cap_add:
+      - SYS_TIME
+      - SYS_NICE
+    restart: unless-stopped
+
+  unbound:
+    container_name: ${UNBOUND_CONTAINER_NAME}
+    image: ${UNBOUND_IMAGE}
+    privileged: true
+    ports:
+      - "${UNBOUND_PORT}:53/tcp"
+      - "${UNBOUND_PORT}:53/udp"
+    networks:
+      frontend:
+    volumes:
+      - './unbound:/opt/unbound/etc/unbound/'
+    restart: unless-stopped
+
+networks:
+  pi_net:
+    external: true
+  frontend:
+    external: true

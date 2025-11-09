@@ -1,0 +1,55 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+title: HomeLab homepage
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+
+theme: dark
+color: slate
+
+useEqualHeights: true
+
+layout:
+  Hypervisor:
+    header: true
+    style: row
+    columns: 3
+  Containers:
+    header: true
+    style: row
+    columns: 3
+  Speed:
+    header: true
+    style: row
+    columns: 3
+  DNS:
+    header: true
+    style: row
+    columns: 4
+  Network:
+    header: true
+    style: row
+    columns: 3
+  Remote Access:
+    header: true
+    style: row
+    columns: 3
+  Storage:
+    header: true
+    style: row
+    columns: 3
+  Media:
+    header: true
+    style: row
+    columns: 3
+  Home Automation:
+    header: true
+    style: row
+    columns: 3
+  Other:
+    header: true
+    style: row
+    columns: 3

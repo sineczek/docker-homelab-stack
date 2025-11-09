@@ -1,0 +1,27 @@
+echo $CLIENT_ID
+
+AUTH_CODE 
+
+curl -i -X POST "https://app.cameconnect.net/api/oauth/auth-code" \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "Accept: application/json" \
+  -d "client_id=$CLIENT_ID" \
+  -d "client_secret=$CLIENT_SECRET" \
+  -d "username=$USERNAME" \
+  -d "password=$PASSWORD" \
+  -d "redirect_uri=https://beta.cameconnect.net/role" \
+  -d "response_type=code" \
+  -d "client_type=confidential" \
+  -d "state=abcdefgh1234"
+
+
+TOKEN
+curl -X POST "https://app.cameconnect.net/api/oauth/token" \
+  -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "Accept: application/json" \
+  -d "grant_type=authorization_code" \
+  -d "code=$AUTH_CODE" \
+  -d "redirect_uri=https://beta.cameconnect.net/role"
+{"access_token":"..",}

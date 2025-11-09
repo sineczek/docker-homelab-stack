@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  portainer:
+    image: ${PORTAINER_IMAGE}
+    container_name: ${PORTAINER_CONTAINER_NAME}
+    ports:
+      - "${PORTAINER_PORT_HTTP}:8000"
+      - "${PORTAINER_PORT_HTTPS}:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PORTAINER_VOLUME_DATA}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.portainer.loadbalancer.server.port=${PORTAINER_PORT_HTTPS}
+      - traefik.http.routers.portainer.entrypoints=websecure
+      - traefik.http.routers.portainer.rule=Host(`${TRAEFIK_HOSTNAME}`)
+      - traefik.http.routers.portainer.tls=true
+      - traefik.http.routers.portainer.tls.certresolver=${TRAEFIK_CERTRESOLVER}
+      - traefik.http.routers.portainer.service=portainer
+    networks:
+      - frontend
+    restart: always
+
+volumes:
+  portainer_data:
+
+networks:
+  frontend:
+    external: true

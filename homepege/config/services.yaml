@@ -1,0 +1,189 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+# icons found here https://github.com/walkxcode/dashboard-icons
+
+- Hypervisor:
+    - The Head:
+        icon: proxmox.png
+        href: "{{HOMEPAGE_VAR_PROXMOX_NODE_1_URL}}"
+        widget:
+            type: proxmox
+            url: "{{HOMEPAGE_VAR_PROXMOX_NODE_1_IP}}"
+            username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
+            password: "{{HOMEPAGE_VAR_PROXMOX_PASS}}"
+            node: "{{HOMEPAGE_VAR_PROXMOX_NODE_1}}"
+    - The Eyez:
+        icon: proxmox.png
+        href: "{{HOMEPAGE_VAR_PROXMOX_NODE_2_URL}}"
+        widget:
+            type: proxmox
+            url: "{{HOMEPAGE_VAR_PROXMOX_NODE_2_IP}}"
+            username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
+            password: "{{HOMEPAGE_VAR_PROXMOX_PASS}}"
+            node: "{{HOMEPAGE_VAR_PROXMOX_NODE_2}}"
+    - The Brain:
+        icon: proxmox.png
+        href: "{{HOMEPAGE_VAR_PROXMOX_NODE_3_URL}}"
+        widget:
+            type: proxmox
+            url: "{{HOMEPAGE_VAR_PROXMOX_NODE_3_IP}}"
+            username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
+            password: "{{HOMEPAGE_VAR_PROXMOX_PASS}}"
+            node: "{{HOMEPAGE_VAR_PROXMOX_NODE_3}}"
+- Containers:
+    - Rancher:
+        icon: rancher.svg
+        href: "{{HOMEPAGE_VAR_RACNHER_URL}}"
+        description: k8s
+    - Longhorn:
+        icon: longhorn.svg
+        href: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+        description: k8s storage
+    - Portainer:
+        icon: portainer.svg
+        href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+        description: docker
+        widget:
+            type: portainer
+            url: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+            env: 2
+            key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
+- Speed:
+    - OOKLA:
+        icon: myspeed.svg
+        href: 
+        widget:
+            type: myspeed
+            url: "{{HOMEPAGE_VAR_MYSPEED_OOKLA}}"
+            password: "{{HOMEPAGE_VAR_MYSPEED_PASS}}"
+    - LibreSpeed:
+        icon: myspeed.svg
+        href: 
+        widget:
+            type: myspeed
+            url: "{{HOMEPAGE_VAR_MYSPEED_LIBRESPEED}}"
+            password: "{{HOMEPAGE_VAR_MYSPEED_PASS}}"
+    - Cloudflare:
+        icon: myspeed.svg
+        href: 
+        widget:
+            type: myspeed
+            url: "{{HOMEPAGE_VAR_MYSPEED_CLOUDFLARE}}"
+            password: "{{HOMEPAGE_VAR_MYSPEED_PASS}}"   
+
+- DNS:
+    - Pi-Hole1:
+        icon: pi-hole.svg
+        href: "{{HOMEPAGE_VAR_PIHOLE_HERF}}"
+        description: Singularity
+        widget:
+            type: pihole
+            url: "{{HOMEPAGE_VAR_PIHOLE_URL_1}}"
+            key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_1}}"
+    - Pi-Hole2:
+        icon: pi-hole.svg
+        href: "{{HOMEPAGE_VAR_PIHOLE_URL_2}}"
+        description: EventHorizon
+        widget:
+            type: pihole
+            url: "{{HOMEPAGE_VAR_PIHOLE_URL_2}}"
+            key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_2}}"
+    - Pi-Hole3:
+        icon: pi-hole.svg
+        href: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
+        description: QuasarGuard
+        widget:
+            type: pihole
+            url: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
+            key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_3}}"
+    - Pi-Hole4:
+        icon: pi-hole.svg
+        href: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
+        description: GravityWell
+        widget:
+            type: pihole
+            url: "{{HOMEPAGE_VAR_PIHOLE_URL_3}}"
+            key: "{{HOMEPAGE_VAR_PIHOLE_API_KEY_3}}"
+- Network:
+    - UniFi:
+        icon: ubiquiti.svg
+        url: "{{HOMEPAGE_VAR_UNIFI_NETWORK_URL}}"
+        widget:
+            type: unifi
+            url: "{{HOMEPAGE_VAR_UNIFI_NETWORK_URL}}"
+            username: "{{HOMEPAGE_VAR_UNIFI_NETWORK_USERNAME}}"
+            password: "{{HOMEPAGE_VAR_UNIFI_NETWORK_PASSWORD}}"
+    - Traefik:
+        icon: traefik.svg
+        href: "{{HOMEPAGE_VAR_TRAEFIK_DASHBOARD}}"
+        widget:
+            type: traefik
+            url: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
+    - Uptime Robot:
+        icon: https://play-lh.googleusercontent.com/cUrv0t00FYQ1GKLuOTvv8qjo1lSDjqZC16IOp3Fb6ijew6Br5m4o16HhDp0GBu_Bw8Y=w240-h480-rw
+        href: https://uptimerobot.com/dashboard
+        description: external
+        widget:
+            type: uptimerobot
+            url: https://api.uptimerobot.com
+            key: "{{HOMEPAGE_VAR_UPTIME_ROBOT_API_KEY}}"
+- Storage:
+    - TrueNAS:
+        icon: truenas.svg
+        href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+        widget:
+            type: truenas
+            url: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+            key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
+            enablePools: true # optional, defaults to false
+            nasType: scale # optional, defaults to freenas
+    - QNap:
+        icon: qnap.svg
+        href: "{{HOMEPAGE_VAR_QNAP_URL}}"
+        widget:
+          type: qnap
+          url: "{{HOMEPAGE_VAR_QNAP_URL}}"
+          username: "{{HOMEPAGE_VAR_QNAP_USER}}"
+          password: "{{HOMEPAGE_VAR_QNAP_PASS}}"
+- Media:
+    - Jellyfin:
+        icon: jellyfin.svg
+        href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+        widget:
+          type: jellyfin
+          url: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+          key: "{{HOMEPAGE_VAR_JELLYFIN_API_TOKEN}}"
+          enableBlocks: true # optional, defaults to false
+          enableNowPlaying: true # optional, defaults to true
+          enableUser: true # optional, defaults to false
+          showEpisodeNumber: true # optional, defaults to false
+          expandOneStreamToTwoRows: false # optional, defaults to true
+
+- Home Automation:
+    - Home Assistant:
+        icon: home-assistant.svg
+        href: "{{HOMEPAGE_VAR_HOME_ASSISTANT_URL}}"
+        widget:
+            type: homeassistant
+            url: "{{HOMEPAGE_VAR_HOME_ASSISTANT_URL}}"
+            key: "{{HOMEPAGE_VAR_HOME_ASSISTANT_API_KEY}}"
+    - UniFi Protect:
+        icon: https://play-lh.googleusercontent.com/DmgQvSdocOrGr0D0rxSBE9sqh23Fw3ck3BgKRN788cZnOKgcZlcEAFRYwmUbp6vMTVI
+        href: "{{HOMEPAGE_VAR_UNIFI_PROTECT_URL}}"
+    - Wazuh:
+        icon: wazuh.png
+        href: "{{HOMEPAGE_VAR_WAZUH_URL}}"
+- Other:
+    - GitLab:
+        icon: gitlab.svg
+        href: https://gitlab.com
+        description: source code
+    - GitHub:
+        icon: github.svg
+        href: https://github.com
+        description: source code
+    - Shlink:
+        icon: https://shlink.io/images/shlink-logo-blue.svg
+        href: "{{HOMEPAGE_VAR_SHLINK_URL}}"
+        description: dashboard

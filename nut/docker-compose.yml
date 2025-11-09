@@ -1,0 +1,31 @@
+
+version: '3.8'
+
+services:
+  nut-server:
+    build: .
+    container_name: nut-server
+    network_mode: host
+    env_file: .env
+    environment:
+      - UPS_HOST=${UPS_SERVER_HOST}
+      - UPS_PORT=${UPS_SERVER_PORT}
+      - UPS_USER=${UPS_SERVER_USER}
+      - UPS_PASSWORD=${UPS_SERVER_PASSWORD}
+    volumes:
+      - /opt/docker_volumes/nut/conf:/nut/conf
+    restart: unless-stopped
+
+  webnut:
+    image: edgd1er/webnut:latest
+    container_name: webnut
+    network_mode: host
+    depends_on:
+      - nut-server
+    env_file: .env
+    environment:
+      - UPS_HOST=${WEBNUT_HOST}
+      - UPS_PORT=${WEBNUT_PORT}
+      - UPS_USER=${WEBNUT_USER}
+      - UPS_PASSWORD=${WEBNUT_PASSWORD}
+    restart: unless-stopped

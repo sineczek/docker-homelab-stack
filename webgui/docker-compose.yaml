@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nut_webgui_1:
+    image: ghcr.io/superioone/nut_webgui:latest
+    env_file: .env
+    environment:
+      - UPSD_ADDR=${NUT1_UPSD_ADDR}
+      - UPSD_USER=${NUT1_UPSD_USER}
+      - UPSD_PASS=${NUT1_UPSD_PASS}
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    networks:
+      - frontend
+
+  nut_webgui_2:
+    image: ghcr.io/superioone/nut_webgui:latest
+    env_file: .env
+    environment:
+      - UPSD_ADDR=${NUT2_UPSD_ADDR}
+      - UPSD_USER=${NUT2_UPSD_USER}
+      - UPSD_PASS=${NUT2_UPSD_PASS}
+    restart: unless-stopped
+    ports:
+      - "9001:9000"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external: true

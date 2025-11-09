@@ -1,0 +1,11 @@
+relayhost = ${POSTFIX_RELAYHOST}
+smtp_sasl_auth_enable = ${POSTFIX_SASL_AUTH_ENABLE}
+smtp_sasl_security_options = ${POSTFIX_SASL_SECURITY_OPTIONS}
+smtp_tls_CAfile = ${POSTFIX_TLS_CA_FILE}
+smtp_use_tls = ${POSTFIX_USE_TLS}
+smtpd_relay_restrictions = ${POSTFIX_RELAY_RESTRICTIONS}
+mydestination = ${POSTFIX_MYDESTINATION}
+myhostname = ${POSTFIX_MYHOSTNAME}
+mynetworks = ${POSTFIX_MYNETWORKS}
+smtp_tls_security_level = ${POSTFIX_TLS_SECURITY_LEVEL}
+smtpd_tls_security_level = ${POSTFIXD_TLS_SECURITY_LEVEL}
