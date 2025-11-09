@@ -67,6 +67,7 @@ Recursively scans the repository for .env files and generates corresponding .env
 ---
 
 ## 📁 Directory Structure
+```
 .
 ├── acame-connect/
 ├── clamav/
@@ -85,6 +86,7 @@ Recursively scans the repository for .env files and generates corresponding .env
 ├── traefik/
 ├── wazuh/
 └── webnut/
+```
 
 ## 🔐 Security Notes
 
