@@ -62,7 +62,7 @@ Security monitoring platform including Wazuh Manager, Indexer, and Dashboard.
 ### pre-commit hook
 It’s a Git pre-commit hook that scans Docker Compose files for hardcoded sensitive values like passwords or API keys and prevents commits if any are found. It ensures that secrets are kept in environment variables or .env files, helping maintain secure configuration practices.
 
-### ,env.example generator
+### env.example generator
 Recursively scans the repository for .env files and generates corresponding .env.example files containing only the keys with empty values. It preserves comments and blank lines, making it easy to provide configuration examples without exposing sensitive data.
 ---
 
