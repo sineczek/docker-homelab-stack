@@ -1,3 +1,8 @@
+# This script recursively scans the repository for .env files and generates 
+# corresponding .env.example files containing only the keys with empty values. 
+# It preserves comments and blank lines, making it easy to provide configuration 
+# examples without exposing sensitive data.
+
 import os
 
 def generate_env_examples_recursive():
@@ -23,7 +28,7 @@ def generate_env_examples_recursive():
                 with open(example_path, 'w') as f:
                     f.write('\n'.join(example_lines))
 
-    print("✅ Poprawiono: wygenerowano pliki .env.example z pustymi wartościami.")
+    print(".env.example were generated.")
 
 if __name__ == "__main__":
     generate_env_examples_recursive()
