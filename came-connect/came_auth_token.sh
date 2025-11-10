@@ -1,5 +1,8 @@
+#!/bin/bash
+
 export $(grep -v '^#' .env | xargs)
-echo $CLIENT_ID
+
+echo "CLIENT_ID: $CAME_CONNECT_CLIENT_ID"
 
 export AUTH_CODE=$(curl -s -X POST "https://app.cameconnect.net/api/oauth/auth-code" \
   -u "$CAME_CONNECT_CLIENT_ID:$CAME_CONNECT_CLIENT_SECRET" \
@@ -14,7 +17,7 @@ export AUTH_CODE=$(curl -s -X POST "https://app.cameconnect.net/api/oauth/auth-c
   -d "client_type=confidential" \
   -d "state=abcdefgh1234" | jq -r '.code')
 
-echo $AUTH_CODE
+echo "AUTH_CODE: $AUTH_CODE"
 
 export AUTH_TOKEN=$(curl -s -X POST "https://app.cameconnect.net/api/oauth/token" \
   -u "$CAME_CONNECT_CLIENT_ID:$CAME_CONNECT_CLIENT_SECRET" \
@@ -24,3 +27,4 @@ export AUTH_TOKEN=$(curl -s -X POST "https://app.cameconnect.net/api/oauth/token
   -d "code=$AUTH_CODE" \
   -d "redirect_uri=https://beta.cameconnect.net/role" | grep -oP '{.*}' | tail -n 1 | jq -r '.access_token')
 
+echo "AUTH_TOKEN: $AUTH_TOKEN"
