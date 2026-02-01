@@ -14,3 +14,20 @@ services:
       - "/:/host:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: unless-stopped
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - |
+          set -e
+          test -s /etc/newrelic-infra.yml
+          pidof newrelic-infra >/dev/null
+          if [ -f /var/log/newrelic-infra/newrelic-infra.log ]; then
+            if ! find /var/log/newrelic-infra -maxdepth 1 -name newrelic-infra.log -mmin -5 -print -quit | grep -q .; then
+              exit 1
+            fi
+          fi
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s

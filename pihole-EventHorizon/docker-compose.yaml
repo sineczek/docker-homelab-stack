@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   pihole:
@@ -18,12 +17,6 @@ services:
     volumes:
       - './pihole/pihole:/etc/pihole'
       - './pihole/dnsmasq.d:/etc/dnsmasq.d'
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.EventHorizon-https.tls=true
-      - traefik.http.routers.EventHorizon-https.tls.certresolver=${TRAEFIK_CERTRESOLVER}
-      - traefik.http.routers.EventHorizon-https.entrypoints=websecure
-      - traefik.http.routers.EventHorizon-https.rule=Host(`${TRAEFIK_HOSTNAME}`)
     cap_add:
       - SYS_TIME
       - SYS_NICE
@@ -42,8 +35,8 @@ services:
       - './unbound:/opt/unbound/etc/unbound/'
     restart: unless-stopped
 
+
 networks:
-  pi_net:
-    external: true
-  frontend:
-    external: true
+  default:
+    external:
+      name: proxy_net

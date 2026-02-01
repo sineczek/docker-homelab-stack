@@ -96,15 +96,6 @@ services:
       - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
       - wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config
       - wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.wazuh.loadbalancer.server.port=5601
-      - traefik.http.services.wazuh.loadbalancer.server.scheme=https
-      - traefik.http.routers.wazuh.entrypoints=websecure
-      - traefik.http.routers.wazuh.rule=Host(`${TRAEFIK_HOSTNAME}`)
-      - traefik.http.routers.wazuh.tls=true
-      - traefik.http.routers.wazuh.tls.certresolver=${TRAEFIK_CERTRESOLVER}
-      - traefik.http.routers.wazuh.service=wazuh
     depends_on:
       - wazuh.indexer
     networks:

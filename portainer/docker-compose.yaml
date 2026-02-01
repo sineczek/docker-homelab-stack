@@ -10,14 +10,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PORTAINER_VOLUME_DATA}:/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.portainer.loadbalancer.server.port=${PORTAINER_PORT_HTTPS}
-      - traefik.http.routers.portainer.entrypoints=websecure
-      - traefik.http.routers.portainer.rule=Host(`${TRAEFIK_HOSTNAME}`)
-      - traefik.http.routers.portainer.tls=true
-      - traefik.http.routers.portainer.tls.certresolver=${TRAEFIK_CERTRESOLVER}
-      - traefik.http.routers.portainer.service=portainer
     networks:
       - frontend
     restart: always

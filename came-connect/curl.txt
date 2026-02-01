@@ -24,3 +24,10 @@ export AUTH_TOKEN=$(curl -s -X POST "https://app.cameconnect.net/api/oauth/token
   -d "code=$AUTH_CODE" \
   -d "redirect_uri=https://beta.cameconnect.net/role" | grep -oP '{.*}' | tail -n 1 | jq -r '.access_token')
 
+# kategorie "device"
+for cat in automations openings thermostat security videoentry; do
+  echo "## $cat"
+  curl -s -i -H "Authorization: Bearer ${AUTH_TOKEN}" \
+    "https://app.cameconnect.net/api/${cat}/${CAME_CONNECT_DEVICE_ID}" | head -n 1
+done
+

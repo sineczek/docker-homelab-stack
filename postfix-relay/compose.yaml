@@ -1,14 +1,78 @@
----
+
 services:
   postfix:
     image: docker.io/mwader/postfix-relay:1.1.39
+    container_name: postfix
     environment:
       - POSTFIX_myhostname=postfix
     volumes:
-      - ./config/postfix-relay/main.cf:/etc/postfix/main.cf:ro
+      #- ./config/postfix-relay/main.cf:/etc/postfix/main.cf:ro
       - ./config/postfix-relay/sasl_passwd:/etc/postfix/sasl_passwd:rw
-      - postfix_data:/etc/postfix
+      # NIE NADPISUJ całego /etc/postfix, bo stracisz pliki z obrazu
+      # Zamiast tego (opcjonalnie) dodaj trwałość do spoola:
+      - postfix_spool:/var/spool/postfix
+      # (opcjonalnie) i do lib, jeśli chcesz:
+      # - postfix_lib:/var/lib/postfix
     restart: unless-stopped
 
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - |
+          set -e
+          postfix status || true
+
+          check_v4() {
+            awk '
+              NR!=1 {
+                if ($2 ~ /:0019$/) {
+                  if ($4=="0A") { f=1; exit }
+                }
+              }
+              END { if (f) exit 0; else exit 1 }
+            ' /proc/net/tcp
+          }
+
+          check_v6() {
+            if [ -f /proc/net/tcp6 ]; then
+              awk '
+                NR!=1 {
+                  if ($2 ~ /:0019$/) {
+                    if ($4=="0A") { f=1; exit }
+                  }
+                }
+                END { if (f) exit 0; else exit 1 }
+              ' /proc/net/tcp6
+            else
+              exit 0
+            fi
+          }
+
+          check_any() {
+            if check_v4; then exit 0; fi
+            if check_v6; then exit 0; fi
+            exit 1
+          }
+
+          # kilka prób z krótkim opóźnieniem, bo master/smtpd może wejść w LISTEN chwilę później
+          if ! check_any; then
+            sleep 1
+            if ! check_any; then
+              sleep 1
+              if ! check_any; then
+                sleep 1
+                if ! check_any; then
+                  sleep 1
+                  check_any
+                fi
+              fi
+            fi
+          fi
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
 volumes:
-  postfix_data:
+  postfix_spool:
+  # postfix_lib:

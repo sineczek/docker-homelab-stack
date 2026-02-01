@@ -114,12 +114,6 @@
             url: "{{HOMEPAGE_VAR_UNIFI_NETWORK_URL}}"
             username: "{{HOMEPAGE_VAR_UNIFI_NETWORK_USERNAME}}"
             password: "{{HOMEPAGE_VAR_UNIFI_NETWORK_PASSWORD}}"
-    - Traefik:
-        icon: traefik.svg
-        href: "{{HOMEPAGE_VAR_TRAEFIK_DASHBOARD}}"
-        widget:
-            type: traefik
-            url: "{{HOMEPAGE_VAR_TRAEFIK_URL}}"
     - Uptime Robot:
         icon: https://play-lh.googleusercontent.com/cUrv0t00FYQ1GKLuOTvv8qjo1lSDjqZC16IOp3Fb6ijew6Br5m4o16HhDp0GBu_Bw8Y=w240-h480-rw
         href: https://uptimerobot.com/dashboard

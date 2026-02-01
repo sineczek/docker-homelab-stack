@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="NONE,NOARCHIVE" />
+  <title>&lt;class &#39;requests.exceptions.HTTPError&#39;&gt; at /devices//command/5</title>
+  <style type="text/css">
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font:small sans-serif; }
+    body>div { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; }
+    h2 { margin-bottom:.8em; }
+    h2 span { font-size:80%; color:#666; font-weight:normal; }
+    h3 { margin:1em 0 .5em 0; }
+    h4 { margin:0 0 .5em 0; font-weight: normal; }
+    table {
+        border:1px solid #ccc; border-collapse: collapse; background:white; }
+    tbody td, tbody th { vertical-align:top; padding:2px 3px; }
+    thead th {
+        padding:1px 6px 1px 3px; background:#fefefe; text-align:left;
+        font-weight:normal; font-size:11px; border:1px solid #ddd; }
+    tbody th { text-align:right; color:#666; padding-right:.5em; }
+    table.vars { margin:5px 0 2px 40px; }
+    table.vars td, table.req td { font-family:monospace; }
+    table td.code { width:100%;}
+    table td.code div { overflow:hidden; }
+    table.source th { color:#666; }
+    table.source td {
+        font-family:monospace; white-space:pre; border-bottom:1px solid #eee; }
+    ul.traceback { list-style-type:none; }
+    ul.traceback li.frame { margin-bottom:1em; }
+    div.context { margin: 10px 0; }
+    div.context ol {
+        padding-left:30px; margin:0 10px; list-style-position: inside; }
+    div.context ol li {
+        font-family:monospace; white-space:pre; color:#666; cursor:pointer; }
+    div.context ol.context-line li { color:black; background-color:#ccc; }
+    div.context ol.context-line li span { float: right; }
+    div.commands { margin-left: 40px; }
+    div.commands a { color:black; text-decoration:none; }
+    #summary { background: #ffc; }
+    #summary h2 { font-weight: normal; color: #666; }
+    #explanation { background:#eee; }
+    #template, #template-not-exist { background:#f6f6f6; }
+    #template-not-exist ul { margin: 0 0 0 20px; }
+    #traceback { background:#eee; }
+    #requestinfo { background:#f6f6f6; padding-left:120px; }
+    #summary table { border:none; background:transparent; }
+    #requestinfo h2, #requestinfo h3 { position:relative; margin-left:-100px; }
+    #requestinfo h3 { margin-bottom:-1em; }
+    .error { background: #ffc; }
+    .specific { color:#cc3300; font-weight:bold; }
+  </style>
+  <script type="text/javascript">
+  //<!--
+    function getElementsByClassName(oElm, strTagName, strClassName){
+        // Written by Jonathan Snook, http://www.snook.ca/jon;
+        // Add-ons by Robert Nyman, http://www.robertnyman.com
+        var arrElements = (strTagName == "*" && document.all)? document.all :
+        oElm.getElementsByTagName(strTagName);
+        var arrReturnElements = new Array();
+        strClassName = strClassName.replace(/\-/g, "\-");
+        var oRegExp = new RegExp("(^|\s)" + strClassName + "(\s|$)");
+        var oElement;
+        for(var i=0; i<arrElements.length; i++){
+            oElement = arrElements[i];
+            if(oRegExp.test(oElement.className)){
+                arrReturnElements.push(oElement);
+            }
+        }
+        return (arrReturnElements)
+    }
+    function hideAll(elems) {
+      for (var e = 0; e < elems.length; e++) {
+        elems[e].style.display = 'none';
+      }
+    }
+    window.onload = function() {
+      hideAll(getElementsByClassName(document, 'table', 'vars'));
+      hideAll(getElementsByClassName(document, 'ol', 'pre-context'));
+      hideAll(getElementsByClassName(document, 'ol', 'post-context'));
+    }
+    function toggle() {
+      for (var i = 0; i < arguments.length; i++) {
+        var e = document.getElementById(arguments[i]);
+        if (e) {
+          e.style.display = e.style.display == 'none' ? 'block' : 'none';
+        }
+      }
+      return false;
+    }
+    function varToggle(link, id) {
+      toggle('v' + id);
+      var s = link.getElementsByTagName('span')[0];
+      var uarr = String.fromCharCode(0x25b6);
+      var darr = String.fromCharCode(0x25bc);
+      s.innerHTML = s.innerHTML == uarr ? darr : uarr;
+      return false;
+    }
+    //-->
+  </script>
+</head>
+<body>
+
+<div id="summary">
+  <h1>&lt;class &#39;requests.exceptions.HTTPError&#39;&gt; at /devices//command/5</h1>
+  <h2>401 Client Error: Unauthorized for url: https://app.cameconnect.net/api/oauth/auth-code?client_id=&amp;response_type=code&amp;redirect_uri=https://www.cameconnect.net/role&amp;state=nakvqyfujhtddmioilhesbmscuoswclrhkmhbsqfacvwynoukuscjijbzfucnbqysplzpolzouczpxfdwtbgscpkckrjvrtedjee&amp;nonce=hgbneegnelhmxcddpcvsqqzmwloyamwqbeijyxvjvvcmurnhojhamqiizgkurqckopksnxbxtjlmvuogkvkvhiuyubhnofwujvqv&amp;code_challenge=xWhrRkFshIU-pHjYEV6VDB8XS8J7MvM1foQjEZwLI_U&amp;code_challenge_method=S256</h2>
+  <table><tr>
+    <th>Python</th>
+    <td>/usr/local/lib/python3.8/site-packages/requests/models.py in raise_for_status, line 1025</td>
+  </tr><tr>
+    <th>Web</th>
+    <td>POST http://localhost:9002/devices//command/5</td>
+  </tr></table>
+</div>
+<div id="traceback">
+<h2>Traceback <span>(innermost first)</span></h2>
+<ul class="traceback">
+<li class="frame">
+<code>/usr/local/lib/python3.8/site-packages/requests/models.py</code> in <code>raise_for_status</code>
+<div class="context" id="c138699099814272">
+<ol start="1018" class="pre-context" id="pre138699099814272">
+<li onclick="toggle('pre138699099814272', 'post138699099814272')"></li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">        elif 500 &lt;= self.status_code &lt; 600:</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">            http_error_msg = (</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">                f&quot;{self.status_code} Server Error: {reason} for url: {self.url}&quot;</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">            )</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')"></li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">        if http_error_msg:</li>
+</ol>
+<ol start="1025" class="context-line"><li onclick="toggle('pre138699099814272', 'post138699099814272')">            raise HTTPError(http_error_msg, response=self) <span>...</span></li></ol>
+<ol start='1026' class="post-context" id="post138699099814272">
+<li onclick="toggle('pre138699099814272', 'post138699099814272')"></li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">    def close(self):</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">        &quot;&quot;&quot;Releases the connection back to the pool. Once this method has been</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">        called the underlying ``raw`` object must not be accessed again.</li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')"></li>
+<li onclick="toggle('pre138699099814272', 'post138699099814272')">        *Note: Should not normally need to be called explicitly.*</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699099814272')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699099814272"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>http_error_msg</td><td class="code"><div>(&#39;401 Client Error: Unauthorized for url: &#39;
+ &#39;https://app.cameconnect.net/api/oauth/auth-code?client_id=&amp;response_type=code&amp;redirect_uri=https://www.cameconnect.net/role&amp;state=nakvqyfujhtddmioilhesbmscuoswclrhkmhbsqfacvwynoukuscjijbzfucnbqysplzpolzouczpxfdwtbgscpkckrjvrtedjee&amp;nonce=hgbneegnelhmxcddpcvsqqzmwloyamwqbeijyxvjvvcmurnhojhamqiizgkurqckopksnxbxtjlmvuogkvkvhiuyubhnofwujvqv&amp;code_challenge=xWhrRkFshIU-pHjYEV6VDB8XS8J7MvM1foQjEZwLI_U&amp;code_challenge_method=S256&#39;)</div></td></tr>
+<tr><td>reason</td><td class="code"><div>&#39;Unauthorized&#39;</div></td></tr>
+<tr><td>self</td><td class="code"><div>&lt;Response [401]&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/app/main.py</code> in <code>fetch_auth_code</code>
+<div class="context" id="c138699100023488">
+<ol start="28" class="pre-context" id="pre138699100023488">
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    password = os.environ[&#39;CAME_CONNECT_PASSWORD&#39;]</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    nonce = random_string(100)</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    state = random_string(100)</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    code_challenge = generate_code_challenge(code_verifier)</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    url = f&quot;https://app.cameconnect.net/api/oauth/auth-code?client_id={client_id}&amp;response_type=code&amp;redirect_uri=https://www.cameconnect.net/role&amp;state={state}&amp;nonce={nonce}&amp;code_challenge={code_challenge}&amp;code_challenge_method=S256&quot;</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    data = {&#39;grant_type&#39;: &#39;authorization_code&#39;, &#39;client_id&#39;: client_id, &#39;username&#39;: username, &#39;password&#39;: password}</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    response = requests.post(url, data=data, auth=HTTPBasicAuth(client_id, client_secret))</li>
+</ol>
+<ol start="35" class="context-line"><li onclick="toggle('pre138699100023488', 'post138699100023488')">    response.raise_for_status() <span>...</span></li></ol>
+<ol start='36' class="post-context" id="post138699100023488">
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    return response.json()[&#39;code&#39;]</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')"></li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">def fetch_bearer_token(client_id, client_secret, code, code_verifier):</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    redirect_uri = &#39;https://www.cameconnect.net/role&#39;</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">    data = {</li>
+<li onclick="toggle('pre138699100023488', 'post138699100023488')">        &#39;grant_type&#39;: &#39;authorization_code&#39;,</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100023488')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100023488"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>client_id</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>client_secret</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>code_challenge</td><td class="code"><div>&#39;xWhrRkFshIU-pHjYEV6VDB8XS8J7MvM1foQjEZwLI_U&#39;</div></td></tr>
+<tr><td>code_verifier</td><td class="code"><div>&#39;evlqjntiduxqoeinhogoyiuubgqmlwvdiilssnkumgvhsgkpwqoitxnybuqafwquyemzzkociofltusshltmrajpjlvfqbidtxor&#39;</div></td></tr>
+<tr><td>data</td><td class="code"><div>{&#39;client_id&#39;: &#39;&#39;,
+ &#39;grant_type&#39;: &#39;authorization_code&#39;,
+ &#39;password&#39;: &#39;&#39;,
+ &#39;username&#39;: &#39;&#39;}</div></td></tr>
+<tr><td>nonce</td><td class="code"><div>&#39;hgbneegnelhmxcddpcvsqqzmwloyamwqbeijyxvjvvcmurnhojhamqiizgkurqckopksnxbxtjlmvuogkvkvhiuyubhnofwujvqv&#39;</div></td></tr>
+<tr><td>password</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>response</td><td class="code"><div>&lt;Response [401]&gt;</div></td></tr>
+<tr><td>state</td><td class="code"><div>&#39;nakvqyfujhtddmioilhesbmscuoswclrhkmhbsqfacvwynoukuscjijbzfucnbqysplzpolzouczpxfdwtbgscpkckrjvrtedjee&#39;</div></td></tr>
+<tr><td>url</td><td class="code"><div>&#39;https://app.cameconnect.net/api/oauth/auth-code?client_id=&amp;response_type=code&amp;redirect_uri=https://www.cameconnect.net/role&amp;state=nakvqyfujhtddmioilhesbmscuoswclrhkmhbsqfacvwynoukuscjijbzfucnbqysplzpolzouczpxfdwtbgscpkckrjvrtedjee&amp;nonce=hgbneegnelhmxcddpcvsqqzmwloyamwqbeijyxvjvvcmurnhojhamqiizgkurqckopksnxbxtjlmvuogkvkvhiuyubhnofwujvqv&amp;code_challenge=xWhrRkFshIU-pHjYEV6VDB8XS8J7MvM1foQjEZwLI_U&amp;code_challenge_method=S256&#39;</div></td></tr>
+<tr><td>username</td><td class="code"><div>&#39;&#39;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/app/main.py</code> in <code>fetch_token</code>
+<div class="context" id="c138699100023424">
+<ol start="49" class="pre-context" id="pre138699100023424">
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">    json_data = response.json()</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">    return {&#39;access_token&#39;: json_data[&#39;access_token&#39;], &#39;expires_in&#39;: json_data[&#39;expires_in&#39;]}</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')"></li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">def fetch_token():</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">    logging.info(&quot;Connecting to CAME Connect to fetch token...&quot;)</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">    code_verifier = random_string(100)</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">    try:</li>
+</ol>
+<ol start="56" class="context-line"><li onclick="toggle('pre138699100023424', 'post138699100023424')">        code = fetch_auth_code(code_verifier) <span>...</span></li></ol>
+<ol start='57' class="post-context" id="post138699100023424">
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">        logging.info(&quot;Auth code fetched successfully.&quot;)</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">        bearer = fetch_bearer_token(</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">            os.environ[&#39;CAME_CONNECT_CLIENT_ID&#39;],</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">            os.environ[&#39;CAME_CONNECT_CLIENT_SECRET&#39;],</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">            code,</li>
+<li onclick="toggle('pre138699100023424', 'post138699100023424')">            code_verifier</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100023424')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100023424"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>code_verifier</td><td class="code"><div>&#39;evlqjntiduxqoeinhogoyiuubgqmlwvdiilssnkumgvhsgkpwqoitxnybuqafwquyemzzkociofltusshltmrajpjlvfqbidtxor&#39;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/app/main.py</code> in <code>POST</code>
+<div class="context" id="c138699100023168">
+<ol start="125" class="pre-context" id="pre138699100023168">
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        devices = fetch_devices(token)</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        web.header(&#39;Content-Type&#39;, &#39;application/json&#39;)</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        return json.dumps(devices)</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')"></li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">class DeviceCommand:</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">    def POST(self, device_id, command_id):</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        logging.info(f&quot;Executing command {command_id} on device {device_id}&quot;)</li>
+</ol>
+<ol start="132" class="context-line"><li onclick="toggle('pre138699100023168', 'post138699100023168')">        token = fetch_token() <span>...</span></li></ol>
+<ol start='133' class="post-context" id="post138699100023168">
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        url = f&quot;https://app.cameconnect.net/api/automations/{device_id}/commands/{command_id}&quot;</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        headers = {&quot;Authorization&quot;: f&quot;Bearer {token}&quot;}</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')"></li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        response = requests.post(url, headers=headers, timeout=30)</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">        try:</li>
+<li onclick="toggle('pre138699100023168', 'post138699100023168')">            res = response.json()</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100023168')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100023168"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>command_id</td><td class="code"><div>&#39;5&#39;</div></td></tr>
+<tr><td>device_id</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>self</td><td class="code"><div>&lt;main.DeviceCommand object at 0x7e2566936670&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/usr/local/lib/python3.8/site-packages/web/application.py</code> in <code>handle_class</code>
+<div class="context" id="c138699100022848">
+<ol start="487" class="pre-context" id="pre138699100022848">
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">        def handle_class(cls):</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            meth = web.ctx.method</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            if meth == &quot;HEAD&quot; and not hasattr(cls, meth):</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">                meth = &quot;GET&quot;</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            if not hasattr(cls, meth):</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">                raise web.nomethod(cls)</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            tocall = getattr(cls(), meth)</li>
+</ol>
+<ol start="494" class="context-line"><li onclick="toggle('pre138699100022848', 'post138699100022848')">            return tocall(*args) <span>...</span></li></ol>
+<ol start='495' class="post-context" id="post138699100022848">
+<li onclick="toggle('pre138699100022848', 'post138699100022848')"></li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">        if f is None:</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            raise web.notfound()</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">        elif isinstance(f, application):</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">            return f.handle_with_processors()</li>
+<li onclick="toggle('pre138699100022848', 'post138699100022848')">        elif isclass(f):</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100022848')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100022848"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>args</td><td class="code"><div>[&#39;&#39;, &#39;5&#39;]</div></td></tr>
+<tr><td>cls</td><td class="code"><div>&lt;class &#39;main.DeviceCommand&#39;&gt;</div></td></tr>
+<tr><td>meth</td><td class="code"><div>&#39;POST&#39;</div></td></tr>
+<tr><td>tocall</td><td class="code"><div>&lt;bound method DeviceCommand.POST of &lt;main.DeviceCommand object at 0x7e2566936670&gt;&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/usr/local/lib/python3.8/site-packages/web/application.py</code> in <code>_delegate</code>
+<div class="context" id="c138699100022208">
+<ol start="509" class="pre-context" id="pre138699100022208">
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">                raise web.redirect(url)</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">            elif &quot;.&quot; in f:</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">                mod, cls = f.rsplit(&quot;.&quot;, 1)</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">                mod = __import__(mod, None, None, [&quot;&quot;])</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">                cls = getattr(mod, cls)</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">            else:</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">                cls = fvars[f]</li>
+</ol>
+<ol start="516" class="context-line"><li onclick="toggle('pre138699100022208', 'post138699100022208')">            return handle_class(cls) <span>...</span></li></ol>
+<ol start='517' class="post-context" id="post138699100022208">
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">        elif hasattr(f, &quot;__call__&quot;):</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">            return f()</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">        else:</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">            return web.notfound()</li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')"></li>
+<li onclick="toggle('pre138699100022208', 'post138699100022208')">    def _match(self, mapping, value):</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100022208')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100022208"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>args</td><td class="code"><div>[&#39;&#39;, &#39;5&#39;]</div></td></tr>
+<tr><td>cls</td><td class="code"><div>&lt;class &#39;main.DeviceCommand&#39;&gt;</div></td></tr>
+<tr><td>f</td><td class="code"><div>&#39;DeviceCommand&#39;</div></td></tr>
+<tr><td>fvars</td><td class="code"><div>{&#39;DeviceCommand&#39;: &lt;class &#39;main.DeviceCommand&#39;&gt;,
+ &#39;DevicesList&#39;: &lt;class &#39;main.DevicesList&#39;&gt;,
+ &#39;HTTPBasicAuth&#39;: &lt;class &#39;requests.auth.HTTPBasicAuth&#39;&gt;,
+ &#39;POST&#39;: &lt;function POST at 0x7e25669c1160&gt;,
+ &#39;__builtins__&#39;: {&#39;ArithmeticError&#39;: &lt;class &#39;ArithmeticError&#39;&gt;,
+                  &#39;AssertionError&#39;: &lt;class &#39;AssertionError&#39;&gt;,
+                  &#39;AttributeError&#39;: &lt;class &#39;AttributeError&#39;&gt;,
+                  &#39;BaseException&#39;: &lt;class &#39;BaseException&#39;&gt;,
+                  &#39;BlockingIOError&#39;: &lt;class &#39;BlockingIOError&#39;&gt;,
+                  &#39;BrokenPipeError&#39;: &lt;class &#39;BrokenPipeError&#39;&gt;,
+                  &#39;BufferError&#39;: &lt;class &#39;BufferError&#39;&gt;,
+                  &#39;BytesWarning&#39;: &lt;class &#39;BytesWarning&#39;&gt;,
+                  &#39;ChildProcessError&#39;: &lt;class &#39;ChildProcessError&#39;&gt;,
+                  &#39;ConnectionAbortedError&#39;: &lt;class &#39;ConnectionAbortedError&#39;&gt;,
+                  &#39;ConnectionError&#39;: &lt;class &#39;ConnectionError&#39;&gt;,
+                  &#39;ConnectionRefusedError&#39;: &lt;class &#39;ConnectionRefusedError&#39;&gt;,
+                  &#39;ConnectionResetError&#39;: &lt;class &#39;ConnectionResetError&#39;&gt;,
+                  &#39;DeprecationWarning&#39;: &lt;class &#39;DeprecationWarning&#39;&gt;,
+                  &#39;EOFError&#39;: &lt;class &#39;EOFError&#39;&gt;,
+                  &#39;Ellipsis&#39;: Ellipsis,
+                  &#39;EnvironmentError&#39;: &lt;class &#39;OSError&#39;&gt;,
+                  &#39;Exception&#39;: &lt;class &#39;Exception&#39;&gt;,
+                  &#39;False&#39;: False,
+                  &#39;FileExistsError&#39;: &lt;class &#39;FileExistsError&#39;&gt;,
+                  &#39;FileNotFoundError&#39;: &lt;class &#39;FileNotFoundError&#39;&gt;,
+                  &#39;FloatingPointError&#39;: &lt;class &#39;FloatingPointError&#39;&gt;,
+                  &#39;FutureWarning&#39;: &lt;class &#39;FutureWarning&#39;&gt;,
+                  &#39;GeneratorExit&#39;: &lt;class &#39;GeneratorExit&#39;&gt;,
+                  &#39;IOError&#39;: &lt;class &#39;OSError&#39;&gt;,
+                  &#39;ImportError&#39;: &lt;class &#39;ImportError&#39;&gt;,
+                  &#39;ImportWarning&#39;: &lt;class &#39;ImportWarning&#39;&gt;,
+                  &#39;IndentationError&#39;: &lt;class &#39;IndentationError&#39;&gt;,
+                  &#39;IndexError&#39;: &lt;class &#39;IndexError&#39;&gt;,
+                  &#39;InterruptedError&#39;: &lt;class &#39;InterruptedError&#39;&gt;,
+                  &#39;IsADirectoryError&#39;: &lt;class &#39;IsADirectoryError&#39;&gt;,
+                  &#39;KeyError&#39;: &lt;class &#39;KeyError&#39;&gt;,
+                  &#39;KeyboardInterrupt&#39;: &lt;class &#39;KeyboardInterrupt&#39;&gt;,
+                  &#39;LookupError&#39;: &lt;class &#39;LookupError&#39;&gt;,
+                  &#39;MemoryError&#39;: &lt;class &#39;MemoryError&#39;&gt;,
+                  &#39;ModuleNotFoundError&#39;: &lt;class &#39;ModuleNotFoundError&#39;&gt;,
+                  &#39;NameError&#39;: &lt;class &#39;NameError&#39;&gt;,
+                  &#39;None&#39;: None,
+                  &#39;NotADirectoryError&#39;: &lt;class &#39;NotADirectoryError&#39;&gt;,
+                  &#39;NotImplemented&#39;: NotImplemented,
+                  &#39;NotImplementedError&#39;: &lt;class &#39;NotImplementedError&#39;&gt;,
+                  &#39;OSError&#39;: &lt;class &#39;OSError&#39;&gt;,
+                  &#39;OverflowError&#39;: &lt;class &#39;OverflowError&#39;&gt;,
+                  &#39;PendingDeprecationWarning&#39;: &lt;class &#39;PendingDeprecationWarning&#39;&gt;,
+                  &#39;PermissionError&#39;: &lt;class &#39;PermissionError&#39;&gt;,
+                  &#39;ProcessLookupError&#39;: &lt;class &#39;ProcessLookupError&#39;&gt;,
+                  &#39;RecursionError&#39;: &lt;class &#39;RecursionError&#39;&gt;,
+                  &#39;ReferenceError&#39;: &lt;class &#39;ReferenceError&#39;&gt;,
+                  &#39;ResourceWarning&#39;: &lt;class &#39;ResourceWarning&#39;&gt;,
+                  &#39;RuntimeError&#39;: &lt;class &#39;RuntimeError&#39;&gt;,
+                  &#39;RuntimeWarning&#39;: &lt;class &#39;RuntimeWarning&#39;&gt;,
+                  &#39;StopAsyncIteration&#39;: &lt;class &#39;StopAsyncIteration&#39;&gt;,
+                  &#39;StopIteration&#39;: &lt;class &#39;StopIteration&#39;&gt;,
+                  &#39;SyntaxError&#39;: &lt;class &#39;SyntaxError&#39;&gt;,
+                  &#39;SyntaxWarning&#39;: &lt;class &#39;SyntaxWarning&#39;&gt;,
+                  &#39;SystemError&#39;: &lt;class &#39;SystemError&#39;&gt;,
+                  &#39;SystemExit&#39;: &lt;class &#39;SystemExit&#39;&gt;,
+                  &#39;TabError&#39;: &lt;class &#39;TabError&#39;&gt;,
+                  &#39;TimeoutError&#39;: &lt;class &#39;TimeoutError&#39;&gt;,
+                  &#39;True&#39;: True,
+                  &#39;TypeError&#39;: &lt;class &#39;TypeError&#39;&gt;,
+                  &#39;UnboundLocalError&#39;: &lt;class &#39;UnboundLocalError&#39;&gt;,
+                  &#39;UnicodeDecodeError&#39;: &lt;class &#39;UnicodeDecodeError&#39;&gt;,
+                  &#39;UnicodeEncodeError&#39;: &lt;class &#39;UnicodeEncodeError&#39;&gt;,
+                  &#39;UnicodeError&#39;: &lt;class &#39;UnicodeError&#39;&gt;,
+                  &#39;UnicodeTranslateError&#39;: &lt;class &#39;UnicodeTranslateError&#39;&gt;,
+                  &#39;UnicodeWarning&#39;: &lt;class &#39;UnicodeWarning&#39;&gt;,
+                  &#39;UserWarning&#39;: &lt;class &#39;UserWarning&#39;&gt;,
+                  &#39;ValueError&#39;: &lt;class &#39;ValueError&#39;&gt;,
+                  &#39;Warning&#39;: &lt;class &#39;Warning&#39;&gt;,
+                  &#39;ZeroDivisionError&#39;: &lt;class &#39;ZeroDivisionError&#39;&gt;,
+                  &#39;__build_class__&#39;: &lt;built-in function __build_class__&gt;,
+                  &#39;__debug__&#39;: True,
+                  &#39;__doc__&#39;: &#39;Built-in functions, exceptions, and other &#39;
+                             &#39;objects.\n&#39;
+                             &#39;\n&#39;
+                             &quot;Noteworthy: None is the `nil&#39; object; Ellipsis &quot;
+                             &quot;represents `...&#39; in slices.&quot;,
+                  &#39;__import__&#39;: &lt;built-in function __import__&gt;,
+                  &#39;__loader__&#39;: &lt;class &#39;_frozen_importlib.BuiltinImporter&#39;&gt;,
+                  &#39;__name__&#39;: &#39;builtins&#39;,
+                  &#39;__package__&#39;: &#39;&#39;,
+                  &#39;__spec__&#39;: ModuleSpec(name=&#39;builtins&#39;, loader=&lt;class &#39;_frozen_importlib.BuiltinImporter&#39;&gt;),
+                  &#39;abs&#39;: &lt;built-in function abs&gt;,
+                  &#39;all&#39;: &lt;built-in function all&gt;,
+                  &#39;any&#39;: &lt;built-in function any&gt;,
+                  &#39;ascii&#39;: &lt;built-in function ascii&gt;,
+                  &#39;bin&#39;: &lt;built-in function bin&gt;,
+                  &#39;bool&#39;: &lt;class &#39;bool&#39;&gt;,
+                  &#39;breakpoint&#39;: &lt;built-in function breakpoint&gt;,
+                  &#39;bytearray&#39;: &lt;class &#39;bytearray&#39;&gt;,
+                  &#39;bytes&#39;: &lt;class &#39;bytes&#39;&gt;,
+                  &#39;callable&#39;: &lt;built-in function callable&gt;,
+                  &#39;chr&#39;: &lt;built-in function chr&gt;,
+                  &#39;classmethod&#39;: &lt;class &#39;classmethod&#39;&gt;,
+                  &#39;compile&#39;: &lt;built-in function compile&gt;,
+                  &#39;complex&#39;: &lt;class &#39;complex&#39;&gt;,
+                  &#39;copyright&#39;: Copyright (c) 2001-2023 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved.,
+                  &#39;credits&#39;:     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation and a cast of thousands
+    for supporting Python development.  See www.python.org for more information.,
+                  &#39;delattr&#39;: &lt;built-in function delattr&gt;,
+                  &#39;dict&#39;: &lt;class &#39;dict&#39;&gt;,
+                  &#39;dir&#39;: &lt;built-in function dir&gt;,
+                  &#39;divmod&#39;: &lt;built-in function divmod&gt;,
+                  &#39;enumerate&#39;: &lt;class &#39;enumerate&#39;&gt;,
+                  &#39;eval&#39;: &lt;built-in function eval&gt;,
+                  &#39;exec&#39;: &lt;built-in function exec&gt;,
+                  &#39;exit&#39;: Use exit() or Ctrl-D (i.e. EOF) to exit,
+                  &#39;filter&#39;: &lt;class &#39;filter&#39;&gt;,
+                  &#39;float&#39;: &lt;class &#39;float&#39;&gt;,
+                  &#39;format&#39;: &lt;built-in function format&gt;,
+                  &#39;frozenset&#39;: &lt;class &#39;frozenset&#39;&gt;,
+                  &#39;getattr&#39;: &lt;built-in function getattr&gt;,
+                  &#39;globals&#39;: &lt;built-in function globals&gt;,
+                  &#39;hasattr&#39;: &lt;built-in function hasattr&gt;,
+                  &#39;hash&#39;: &lt;built-in function hash&gt;,
+                  &#39;help&#39;: Type help() for interactive help, or help(object) for help about object.,
+                  &#39;hex&#39;: &lt;built-in function hex&gt;,
+                  &#39;id&#39;: &lt;built-in function id&gt;,
+                  &#39;input&#39;: &lt;built-in function input&gt;,
+                  &#39;int&#39;: &lt;class &#39;int&#39;&gt;,
+                  &#39;isinstance&#39;: &lt;built-in function isinstance&gt;,
+                  &#39;issubclass&#39;: &lt;built-in function issubclass&gt;,
+                  &#39;iter&#39;: &lt;built-in function iter&gt;,
+                  &#39;len&#39;: &lt;built-in function len&gt;,
+                  &#39;license&#39;: Type license() to see the full license text,
+                  &#39;list&#39;: &lt;class &#39;list&#39;&gt;,
+                  &#39;locals&#39;: &lt;built-in function locals&gt;,
+                  &#39;map&#39;: &lt;class &#39;map&#39;&gt;,
+                  &#39;max&#39;: &lt;built-in function max&gt;,
+                  &#39;memoryview&#39;: &lt;class &#39;memoryview&#39;&gt;,
+                  &#39;min&#39;: &lt;built-in function min&gt;,
+                  &#39;next&#39;: &lt;built-in function next&gt;,
+                  &#39;object&#39;: &lt;class &#39;object&#39;&gt;,
+                  &#39;oct&#39;: &lt;built-in function oct&gt;,
+                  &#39;open&#39;: &lt;built-in function open&gt;,
+                  &#39;ord&#39;: &lt;built-in function ord&gt;,
+                  &#39;pow&#39;: &lt;built-in function pow&gt;,
+                  &#39;print&#39;: &lt;built-in function print&gt;,
+                  &#39;property&#39;: &lt;class &#39;property&#39;&gt;,
+                  &#39;quit&#39;: Use quit() or Ctrl-D (i.e. EOF) to exit,
+                  &#39;range&#39;: &lt;class &#39;range&#39;&gt;,
+                  &#39;repr&#39;: &lt;built-in function repr&gt;,
+                  &#39;reversed&#39;: &lt;class &#39;reversed&#39;&gt;,
+                  &#39;round&#39;: &lt;built-in function round&gt;,
+                  &#39;set&#39;: &lt;class &#39;set&#39;&gt;,
+                  &#39;setattr&#39;: &lt;built-in function setattr&gt;,
+                  &#39;slice&#39;: &lt;class &#39;slice&#39;&gt;,
+                  &#39;sorted&#39;: &lt;built-in function sorted&gt;,
+                  &#39;staticmethod&#39;: &lt;class &#39;staticmethod&#39;&gt;,
+                  &#39;str&#39;: &lt;class &#39;str&#39;&gt;,
+                  &#39;sum&#39;: &lt;built-in function sum&gt;,
+                  &#39;super&#39;: &lt;class &#39;super&#39;&gt;,
+                  &#39;tuple&#39;: &lt;class &#39;tuple&#39;&gt;,
+                  &#39;type&#39;: &lt;class &#39;type&#39;&gt;,
+                  &#39;vars&#39;: &lt;built-in function vars&gt;,
+                  &#39;zip&#39;: &lt;class &#39;zip&#39;&gt;},
+ &#39;__cached__&#39;: &#39;/app/__pycache__/main.cpython-38.pyc&#39;,
+ &#39;__doc__&#39;: None,
+ &#39;__file__&#39;: &#39;/app/main.py&#39;,
+ &#39;__loader__&#39;: &lt;_frozen_importlib_external.SourceFileLoader object at 0x7e2566a23b80&gt;,
+ &#39;__name__&#39;: &#39;main&#39;,
+ &#39;__package__&#39;: &#39;&#39;,
+ &#39;__spec__&#39;: ModuleSpec(name=&#39;main&#39;, loader=&lt;_frozen_importlib_external.SourceFileLoader object at 0x7e2566a23b80&gt;, origin=&#39;/app/main.py&#39;),
+ &#39;app&#39;: &lt;web.application.application object at 0x7e2566a23a60&gt;,
+ &#39;base64&#39;: &lt;module &#39;base64&#39; from &#39;/usr/local/lib/python3.8/base64.py&#39;&gt;,
+ &#39;fetch_auth_code&#39;: &lt;function fetch_auth_code at 0x7e25669b8dc0&gt;,
+ &#39;fetch_bearer_token&#39;: &lt;function fetch_bearer_token at 0x7e25669b8e50&gt;,
+ &#39;fetch_devices&#39;: &lt;function fetch_devices at 0x7e25669c1040&gt;,
+ &#39;fetch_sites&#39;: &lt;function fetch_sites at 0x7e25669b8f70&gt;,
+ &#39;fetch_token&#39;: &lt;function fetch_token at 0x7e25669b8ee0&gt;,
+ &#39;generate_code_challenge&#39;: &lt;function generate_code_challenge at 0x7e25669b8d30&gt;,
+ &#39;hashlib&#39;: &lt;module &#39;hashlib&#39; from &#39;/usr/local/lib/python3.8/hashlib.py&#39;&gt;,
+ &#39;json&#39;: &lt;module &#39;json&#39; from &#39;/usr/local/lib/python3.8/json/__init__.py&#39;&gt;,
+ &#39;logging&#39;: &lt;module &#39;logging&#39; from &#39;/usr/local/lib/python3.8/logging/__init__.py&#39;&gt;,
+ &#39;os&#39;: &lt;module &#39;os&#39; from &#39;/usr/local/lib/python3.8/os.py&#39;&gt;,
+ &#39;random&#39;: &lt;module &#39;random&#39; from &#39;/usr/local/lib/python3.8/random.py&#39;&gt;,
+ &#39;random_string&#39;: &lt;function random_string at 0x7e25669b8ca0&gt;,
+ &#39;requests&#39;: &lt;module &#39;requests&#39; from &#39;/usr/local/lib/python3.8/site-packages/requests/__init__.py&#39;&gt;,
+ &#39;run_command_for_device&#39;: &lt;function run_command_for_device at 0x7e25669c10d0&gt;,
+ &#39;string&#39;: &lt;module &#39;string&#39; from &#39;/usr/local/lib/python3.8/string.py&#39;&gt;,
+ &#39;urls&#39;: (&#39;/devices/(.*)/command/(.*)&#39;,
+          &#39;DeviceCommand&#39;,
+          &#39;/devices&#39;,
+          &#39;DevicesList&#39;,
+          &#39;/devices/(.*)/commands&#39;,
+          &#39;DeviceCommands&#39;),
+ &#39;web&#39;: &lt;module &#39;web&#39; from &#39;/usr/local/lib/python3.8/site-packages/web/__init__.py&#39;&gt;}</div></td></tr>
+<tr><td>handle_class</td><td class="code"><div>&lt;function application._delegate.&lt;locals&gt;.handle_class at 0x7e256675b790&gt;</div></td></tr>
+<tr><td>self</td><td class="code"><div>&lt;web.application.application object at 0x7e2567b00460&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/usr/local/lib/python3.8/site-packages/web/application.py</code> in <code>handle</code>
+<div class="context" id="c138699100021696">
+<ol start="263" class="pre-context" id="pre138699100021696">
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">        return response</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')"></li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">    def browser(self):</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">        return browser.AppBrowser(self)</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')"></li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">    def handle(self):</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">        fn, args = self._match(self.mapping, web.ctx.path)</li>
+</ol>
+<ol start="270" class="context-line"><li onclick="toggle('pre138699100021696', 'post138699100021696')">        return self._delegate(fn, self.fvars, args) <span>...</span></li></ol>
+<ol start='271' class="post-context" id="post138699100021696">
+<li onclick="toggle('pre138699100021696', 'post138699100021696')"></li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">    def handle_with_processors(self):</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">        def process(processors):</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">            try:</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">                if processors:</li>
+<li onclick="toggle('pre138699100021696', 'post138699100021696')">                    p, processors = processors[0], processors[1:]</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100021696')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100021696"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>args</td><td class="code"><div>[&#39;&#39;, &#39;5&#39;]</div></td></tr>
+<tr><td>fn</td><td class="code"><div>&#39;DeviceCommand&#39;</div></td></tr>
+<tr><td>self</td><td class="code"><div>&lt;web.application.application object at 0x7e2567b00460&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+<li class="frame">
+<code>/usr/local/lib/python3.8/site-packages/web/application.py</code> in <code>process</code>
+<div class="context" id="c138699100020800">
+<ol start="272" class="pre-context" id="pre138699100020800">
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">    def handle_with_processors(self):</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">        def process(processors):</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">            try:</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                if processors:</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                    p, processors = processors[0], processors[1:]</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                    return p(lambda: process(processors))</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                else:</li>
+</ol>
+<ol start="279" class="context-line"><li onclick="toggle('pre138699100020800', 'post138699100020800')">                    return self.handle() <span>...</span></li></ol>
+<ol start='280' class="post-context" id="post138699100020800">
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">            except web.HTTPError:</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                raise</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">            except (KeyboardInterrupt, SystemExit):</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                raise</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">            except:</li>
+<li onclick="toggle('pre138699100020800', 'post138699100020800')">                print(traceback.format_exc(), file=web.debug)</li>
+</ol>
+  </div>
+
+<div class="commands">
+<a href='#' onclick="return varToggle(this, '138699100020800')"><span>&#x25b6;</span> Local vars</a>
+
+</div>
+
+<table class="vars"
+id="v138699100020800"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>process</td><td class="code"><div>&lt;function application.handle_with_processors.&lt;locals&gt;.process at 0x7e2566822670&gt;</div></td></tr>
+<tr><td>processors</td><td class="code"><div>[]</div></td></tr>
+<tr><td>self</td><td class="code"><div>&lt;web.application.application object at 0x7e2567b00460&gt;</div></td></tr>
+</tbody>
+</table>
+
+
+
+  </li>
+  </ul>
+</div>
+
+<div id="requestinfo">
+<h2>Request information</h2>
+
+<h3>INPUT</h3>
+
+<p>No data.</p>
+
+
+
+
+
+<h3 id="cookie-info">COOKIES</h3>
+
+<p>No data.</p>
+
+
+
+
+
+<h3 id="meta-info">META</h3>
+
+<table class="req"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>app_stack</td><td class="code"><div>[&lt;web.application.application object at 0x7e2567b00460&gt;]</div></td></tr>
+<tr><td>data</td><td class="code"><div>b&#39;&#39;</div></td></tr>
+<tr><td>fullpath</td><td class="code"><div>&#39;/devices//command/5&#39;</div></td></tr>
+<tr><td>headers</td><td class="code"><div>[]</div></td></tr>
+<tr><td>home</td><td class="code"><div>&#39;http://localhost:9002&#39;</div></td></tr>
+<tr><td>homedomain</td><td class="code"><div>&#39;http://localhost:9002&#39;</div></td></tr>
+<tr><td>homepath</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>host</td><td class="code"><div>&#39;localhost:9002&#39;</div></td></tr>
+<tr><td>ip</td><td class="code"><div>&#39;172.17.0.1&#39;</div></td></tr>
+<tr><td>method</td><td class="code"><div>&#39;POST&#39;</div></td></tr>
+<tr><td>output</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>path</td><td class="code"><div>&#39;/devices//command/5&#39;</div></td></tr>
+<tr><td>protocol</td><td class="code"><div>&#39;http&#39;</div></td></tr>
+<tr><td>query</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>realhome</td><td class="code"><div>&#39;http://localhost:9002&#39;</div></td></tr>
+<tr><td>status</td><td class="code"><div>&#39;200 OK&#39;</div></td></tr>
+</tbody>
+</table>
+
+
+
+
+<h3 id="meta-info">ENVIRONMENT</h3>
+
+<table class="req"
+><thead><tr><th>Variable</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>ACTUAL_SERVER_PROTOCOL</td><td class="code"><div>&#39;HTTP/1.1&#39;</div></td></tr>
+<tr><td>HTTP_ACCEPT</td><td class="code"><div>&#39;*/*&#39;</div></td></tr>
+<tr><td>HTTP_HOST</td><td class="code"><div>&#39;localhost:9002&#39;</div></td></tr>
+<tr><td>HTTP_USER_AGENT</td><td class="code"><div>&#39;curl/7.88.1&#39;</div></td></tr>
+<tr><td>PATH_INFO</td><td class="code"><div>&#39;/devices//command/5&#39;</div></td></tr>
+<tr><td>QUERY_STRING</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>REMOTE_ADDR</td><td class="code"><div>&#39;172.17.0.1&#39;</div></td></tr>
+<tr><td>REMOTE_PORT</td><td class="code"><div>&#39;37966&#39;</div></td></tr>
+<tr><td>REQUEST_METHOD</td><td class="code"><div>&#39;POST&#39;</div></td></tr>
+<tr><td>REQUEST_URI</td><td class="code"><div>&#39;/devices//command/5&#39;</div></td></tr>
+<tr><td>SCRIPT_NAME</td><td class="code"><div>&#39;&#39;</div></td></tr>
+<tr><td>SERVER_NAME</td><td class="code"><div>&#39;localhost&#39;</div></td></tr>
+<tr><td>SERVER_PORT</td><td class="code"><div>&#39;8080&#39;</div></td></tr>
+<tr><td>SERVER_PROTOCOL</td><td class="code"><div>&#39;HTTP/1.1&#39;</div></td></tr>
+<tr><td>SERVER_SOFTWARE</td><td class="code"><div>&#39;Cheroot/11.1.2 Server&#39;</div></td></tr>
+<tr><td>wsgi.errors</td><td class="code"><div>&lt;_io.TextIOWrapper name=&#39;&lt;stderr&gt;&#39; mode=&#39;w&#39; encoding=&#39;utf-8&#39;&gt;</div></td></tr>
+<tr><td>wsgi.input</td><td class="code"><div>&lt;cheroot.server.KnownLengthRFile object at 0x7e2566955a30&gt;</div></td></tr>
+<tr><td>wsgi.input_terminated</td><td class="code"><div>False</div></td></tr>
+<tr><td>wsgi.multiprocess</td><td class="code"><div>False</div></td></tr>
+<tr><td>wsgi.multithread</td><td class="code"><div>True</div></td></tr>
+<tr><td>wsgi.run_once</td><td class="code"><div>False</div></td></tr>
+<tr><td>wsgi.url_scheme</td><td class="code"><div>&#39;http&#39;</div></td></tr>
+<tr><td>wsgi.version</td><td class="code"><div>(1, 0)</div></td></tr>
+</tbody>
+</table>
+
+
+
+</div>
+
+<div id="explanation">
+  <p>
+    You're seeing this error because you have <code>web.config.debug</code>
+    set to <code>True</code>. Set that to <code>False</code> if you don't want to see this.
+  </p>
+</div>
+
+</body>
+</html>
