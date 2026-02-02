@@ -55,6 +55,18 @@ services:
     expose:
       - "9000"
       #- "80"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "( (command -v curl >/dev/null 2>&1 && curl -fsS http://127.0.0.1:9000/ >/dev/null) || (command -v wget >/dev/null 2>&1 && wget -qO- http://127.0.0.1:9000/ >/dev/null) || (command -v nc >/dev/null 2>&1 && nc -z 127.0.0.1 9000) )"
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+      start_period: 45s
+
+
 
   certbot:
     image: certbot/dns-cloudflare:latest
@@ -78,6 +90,19 @@ services:
     # współdzielona przestrzeń sieciowa z nginx-ui -> 127.0.0.1 jest wspólne
     network_mode: "service:nginx-ui"
     command: "tcp-listen:51820,fork,reuseaddr tcp-connect:nginx:51820"
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          # sprawdź połączenie TCP do backendu (nginx:51820) z timeoutem
+          "socat - TCP4:nginx:51820,connect-timeout=2 </dev/null >/dev/null 2>&1"
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
 
 networks:
   proxy_net:

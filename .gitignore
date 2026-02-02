@@ -40,7 +40,6 @@ coverage/
 website/
 immichi/*
 nginx/cloudflare/cloudflare.ini
-nginx/config/*
 nginx/secrets/*
 nginx/cloudflare/*
 nginx/certs/*
