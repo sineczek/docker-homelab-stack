@@ -56,3 +56,4 @@ nginx/nginx-ui/database.db
 pingwatch.sh
 setup_pingwatch.sh
 pihole-EventHorizon/pihole/pihole/*
+came-connect/hassio-cameconnect/*
