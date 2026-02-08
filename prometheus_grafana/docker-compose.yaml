@@ -1,0 +1,279 @@
+name: prometheus_grafana
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=30d
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+      - ./prometheus/secrets:/etc/prometheus/secrets:ro
+    networks:
+      - monitoring
+      - proxy_net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9090/-/ready || exit 1"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    depends_on:
+      alertmanager:
+        condition: service_started
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      GF_SERVER_DOMAIN: grafana.sinq.cc
+      GF_SERVER_ROOT_URL: https://grafana.sinq.cc
+      GF_SERVER_HTTP_PORT: 3100
+      GF_USERS_DEFAULT_THEME: dark
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    networks:
+      - monitoring
+      - proxy_net
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:3100/api/health"]
+      interval: 15s
+      timeout: 5s
+      start_period: 90s
+      retries: 6
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    command:
+      - --path.rootfs=/host
+    volumes:
+      - /:/host:ro,rslave
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/lib/docker/:/host/var/lib/docker:ro
+    networks:
+      - monitoring
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://localhost:9100/metrics | grep -q '^node_exporter_build_info'",
+        ]
+      interval: 20s
+      timeout: 5s
+      start_period: 25s
+      retries: 5
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /cgroup:/cgroup:ro
+    networks:
+      - monitoring
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://localhost:8080/healthz || wget -qO- http://localhost:8080/metrics | grep -q '^cadvisor_version_info'",
+        ]
+      interval: 20s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  nginx-exporter:
+    image: local/nginx-prometheus-exporter:hc
+    build:
+      context: ./images/nginx-exporter
+    container_name: nginx-exporter
+    restart: unless-stopped
+    command:
+      - --nginx.scrape-uri=${NGINX_STATUS_URL}
+    networks:
+      - proxy_net
+      - monitoring
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9113/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  pihole-exporter-1:
+    image: local/pihole-exporter:hc
+    build:
+      context: ./images/pihole-exporter
+    container_name: pihole-exporter-1
+    restart: unless-stopped
+    environment:
+      PIHOLE_HOSTNAME: ${PIHOLE1_URL}
+      PIHOLE_PASSWORD: ${PIHOLE_PASSWORD}
+      INTERVAL: "30s"
+      PORT: "9617"
+    networks:
+      - monitoring
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9617/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 5
+
+  pihole-exporter-2:
+    image: local/pihole-exporter:hc
+    container_name: pihole-exporter-2
+    restart: unless-stopped
+    environment:
+      PIHOLE_HOSTNAME: ${PIHOLE2_URL}
+      PIHOLE_PASSWORD: ${PIHOLE_PASSWORD}
+      INTERVAL: "30s"
+      PORT: "9617"
+    networks:
+      - monitoring
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9617/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 5
+
+  pihole-exporter-3:
+    image: local/pihole-exporter:hc
+    container_name: pihole-exporter-3
+    restart: unless-stopped
+    environment:
+      PIHOLE_HOSTNAME: ${PIHOLE3_URL}
+      PIHOLE_PASSWORD: ${PIHOLE_PASSWORD}
+      INTERVAL: "30s"
+      PORT: "9617"
+    networks:
+      - monitoring
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9617/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 5
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: postgres-exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME_FILE: /run/secrets/postgres_dsn
+    secrets:
+      - postgres_dsn
+    networks:
+      - monitoring
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://localhost:9187/metrics | grep -q '^pg_up'",
+        ]
+      interval: 20s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  pve-exporter:
+    image: prompve/prometheus-pve-exporter:latest
+    container_name: pve-exporter
+    restart: unless-stopped
+    command: ["--config.file=/etc/prometheus/pve.yml"]
+    volumes:
+      - ./exporters/pve/pve.yml:/etc/prometheus/pve.yml:ro
+    networks:
+      - monitoring
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python3 -c "import socket,sys; s=socket.socket(); s.settimeout(2); s.connect((''127.0.0.1'',9221)); s.close()"',
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  ssl-exporter:
+    image: ribbybibby/ssl-exporter:latest
+    container_name: ssl-exporter
+    restart: unless-stopped
+    command: ["--config.file=/etc/ssl-exporter/ssl_exporter.yml"]
+    volumes:
+      - ./exporters/ssl-exporter:/etc/ssl-exporter:ro
+    networks:
+      - monitoring
+      - proxy_net
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter
+    restart: unless-stopped
+    command: ["--config.file=/etc/blackbox/blackbox.yml"]
+    volumes:
+      - ./exporters/blackbox/blackbox.yml:/etc/blackbox/blackbox.yml:ro
+    networks:
+      - monitoring
+      - proxy_net
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9115/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    networks:
+      - monitoring
+      - proxy_net
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - ./alertmanager/templates:/etc/alertmanager/templates:ro
+
+networks:
+  monitoring:
+    driver: bridge
+  proxy_net:
+    external: true
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+secrets:
+  postgres_dsn:
+    file: ./prometheus/secrets/postgres_dsn.txt

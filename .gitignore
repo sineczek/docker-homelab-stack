@@ -57,3 +57,4 @@ pingwatch.sh
 setup_pingwatch.sh
 pihole-EventHorizon/pihole/pihole/*
 came-connect/hassio-cameconnect/
+prometheus_grafana/prometheus/secrets/

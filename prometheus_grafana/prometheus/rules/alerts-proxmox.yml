@@ -1,0 +1,9 @@
+groups:
+- name: proxmox
+  rules:
+  - alert: ProxmoxExporterDown
+    expr: up{job="proxmox-pve"} == 0
+    for: 5m
+    labels: { severity: warning }
+    annotations:
+      summary: "Proxmox exporter down"

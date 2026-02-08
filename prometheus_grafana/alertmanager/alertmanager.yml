@@ -1,0 +1,27 @@
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+  receiver: 'email'
+  routes:
+    - receiver: 'email'
+      continue: true
+    - receiver: 'telegram'
+      continue: true
+
+receivers:
+  - name: 'email'
+    email_configs:
+      - to: ${AM_SMTP_TO}
+        from: ${AM_SMTP_FROM}
+        smarthost: ${AM_SMTP_HOST}
+        require_tls: false
+        send_resolved: true
+
+  - name: 'telegram'
+    telegram_configs:
+      - api_url: https://api.telegram.org
+        bot_token: ${AM_TG_BOT_TOKEN}
+        chat_id: ${AM_TG_CHAT_ID}
+        send_resolved: true

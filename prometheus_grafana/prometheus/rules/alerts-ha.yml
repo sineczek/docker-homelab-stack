@@ -1,0 +1,9 @@
+groups:
+- name: homeassistant
+  rules:
+  - alert: HomeAssistantMetricsMissing
+    expr: up{job="home-assistant"} == 0
+    for: 5m
+    labels: { severity: warning }
+    annotations:
+      summary: "Home Assistant metrics endpoint not reachable"

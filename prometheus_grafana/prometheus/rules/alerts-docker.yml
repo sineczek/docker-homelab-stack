@@ -1,0 +1,9 @@
+groups:
+- name: docker
+  rules:
+  - alert: CadvisorDown
+    expr: up{job="cadvisor"} == 0
+    for: 5m
+    labels: { severity: critical }
+    annotations:
+      summary: "cAdvisor down"

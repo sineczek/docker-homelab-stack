@@ -1,0 +1,9 @@
+groups:
+- name: postgres
+  rules:
+  - alert: PostgresDown
+    expr: pg_up == 0
+    for: 2m
+    labels: { severity: critical }
+    annotations:
+      summary: "Postgres exporter down for Immich"

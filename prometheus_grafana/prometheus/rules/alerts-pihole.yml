@@ -1,0 +1,9 @@
+groups:
+- name: pihole
+  rules:
+  - alert: PiHoleExporterDown
+    expr: up{job=~"pihole-.*"} == 0
+    for: 5m
+    labels: { severity: warning }
+    annotations:
+      summary: "Pi-hole exporter not reachable ({{ $labels.instance }})"

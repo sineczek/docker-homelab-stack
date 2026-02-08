@@ -1,0 +1,15 @@
+groups:
+- name: host
+  rules:
+  - alert: HighCPU
+    expr: avg(rate(node_cpu_seconds_total{mode!="idle"}[5m])) by (instance) > 0.85
+    for: 10m
+    labels: { severity: warning }
+    annotations:
+      summary: "High CPU on {{ $labels.instance }}"
+  - alert: LowDiskSpace
+    expr: (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) < 0.10
+    for: 15m
+    labels: { severity: warning }
+    annotations:
+      summary: "Low disk space on {{ $labels.instance }}"

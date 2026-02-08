@@ -1,0 +1,11 @@
+groups:
+- name: general
+  rules:
+  - alert: PrometheusTargetDown
+    expr: up == 0
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Target {{ $labels.job }} down ({{ $labels.instance }})"
+      description: "Prometheus cannot scrape {{ $labels.job }} on {{ $labels.instance }} for 2m."

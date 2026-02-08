@@ -1,0 +1,10 @@
+{{ define "telegram.default" -}}
+{{ if eq .Status "firing" -}}🔥 *FIRING*{{ else -}}✅ *RESOLVED*{{ end }}
+*Alerts:* {{ len .Alerts }}
+{{ range .Alerts -}}
+• *{{ .Labels.alertname }}* ({{ .Labels.severity }}) on `{{ .Labels.instance }}`
+  {{- if .Annotations.summary }}
+  _{{ .Annotations.summary }}_
+  {{- end }}
+{{ end -}}
+{{- end }}

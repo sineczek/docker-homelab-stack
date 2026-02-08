@@ -1,0 +1,110 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+  scrape_timeout: 10s
+  external_labels:
+    env: "prod"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]
+
+  - job_name: "nginx"
+    static_configs:
+      - targets: ["nginx-exporter:9113"]
+
+  - job_name: "pihole-1"
+    static_configs:
+      - targets: ["pihole-exporter-1:9617"]
+    relabel_configs:
+      - target_label: instance
+        replacement: "pihole-1"
+
+  - job_name: "pihole-2"
+    static_configs:
+      - targets: ["pihole-exporter-2:9617"]
+    relabel_configs:
+      - target_label: instance
+        replacement: "pihole-2"
+
+  - job_name: "pihole-3"
+    static_configs:
+      - targets: ["pihole-exporter-3:9617"]
+    relabel_configs:
+      - target_label: instance
+        replacement: "pihole-3"
+
+  - job_name: "postgres-immich"
+    static_configs:
+      - targets: ["postgres-exporter:9187"]
+
+  - job_name: "home-assistant"
+    scheme: https
+    metrics_path: /api/prometheus
+    bearer_token_file: /etc/prometheus/secrets/homeassistant_token.txt
+    static_configs:
+      - targets: ["ha.sinq.cc"]
+
+  - job_name: "proxmox-pve"
+    static_configs:
+      - targets: ["pve-exporter:9221"]
+
+  - job_name: "ssl-certificates"
+    metrics_path: /probe
+    params:
+      module: [https]
+    static_configs:
+      - targets:
+          - "grafana.sinq.cc:443"
+          - "prometheus.sinq.cc:443"
+# TODO:   - dopisac reszte domen
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: ssl-exporter:9219
+
+  - job_name: "blackbox-http"
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - "https://grafana.sinq.cc/"
+          - "https://prometheus.sinq.cc/"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  - job_name: "rclone"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["rclone:5572"]
+
+  - job_name: "uptime-kuma"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["uptime-kuma:3001"]
