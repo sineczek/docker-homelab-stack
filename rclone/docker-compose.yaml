@@ -1,33 +1,36 @@
-
 services:
   rclone:
     image: rclone/rclone:latest
     container_name: rclone
-    security_opt:
-      - no-new-privileges:true
     restart: unless-stopped
-    command: rcd --rc-web-gui --rc-addr 0.0.0.0:5572 --rc-web-fetch-url=https://api.github.com/repos/rclone/rclone-webui-react/releases/latest --rc-web-gui-update --rc-user user --rc-pass rclone -vv --checksum --transfers=4 --checkers=4 --contimeout=60s --timeout=300s --rc-web-gui-no-open-browser --retries=3 --low-level-retries=10 --stats=1s --stats-file-name-length=0
-    ports:
-      - "5572:5572"
-    volumes:
-      - /opt/docker_volumes/rclone/config:/config/rclone
-      - /opt/docker_volumes/rclone-dashboard/sync_script:/sync_script
-      - /opt/docker_volumes/rclone/data:/data
+
+    command: >
+      rcd
+      --rc-addr=:${RCLONE_INTERNAL_PORT}
+      --rc-no-auth
+      --rc-web-gui
+      --rc-web-gui-update
+      --rc-web-gui-no-open-browser
+      --rc-enable-metrics
+      -vv
+
     environment:
-      - PHP_TZ=Europe/London
+      TZ: ${TZ}
+
+    volumes:
+      - ${RCLONE_CONFIG_PATH}:/config/rclone
+      - ${RCLONE_DATA_PATH}:/data
 
     healthcheck:
-      # sprawdza RC endpoint przez wbudowanego klienta rclone
-      test:
-        - CMD
-        - rclone
-        - rc
-        - --rc-addr=127.0.0.1:5572
-        - --rc-user=user
-        - --rc-pass=rclone
-        - --timeout=5s
-        - core/version
+      test: ["CMD", "rclone", "rc", "--rc-addr=127.0.0.1:${RCLONE_INTERNAL_PORT}", "--timeout=5s", "core/version"]
       interval: 30s
       timeout: 7s
-      retries: 3
+      retries: 5
       start_period: 30s
+
+    networks:
+      - proxy_net
+
+networks:
+  proxy_net:
+    external: true

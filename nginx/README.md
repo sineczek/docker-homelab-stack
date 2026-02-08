@@ -48,11 +48,17 @@ Make sure the configuration file contains a valid `server` block and points to t
 Create (or update) a symbolic link from `sites-available` to `sites-enabled`:
 
 ```
-ln -sf ../sites-available/example.conf nginx/config/sites-enabled/example.conf
+ln -sf /opt/docker_volumes/nginx/config/sites-available/example.conf \
+       /opt/docker_volumes/nginx/config/sites-enabled/example.conf
 ```
 
 This enables the site in NGINX.
 
+If you need to disable the site:
+
+```
+unlink /opt/docker_volumes/nginx/config/sites-enabled/example.conf
+```
 ---
 
 ## 3. Generate TLS Certificates (Certbot + Cloudflare DNS)
