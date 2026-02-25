@@ -1,4 +1,3 @@
-
 services:
   pihole:
     container_name: ${PIHOLE_CONTAINER_NAME}
@@ -10,13 +9,13 @@ services:
     networks:
       pi_net:
         ipv4_address: ${PIHOLE_IPV4_ADDRESS}
-      frontend:
+      proxy_net:
     environment:
       TZ: ${PIHOLE_TZ}
       WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
     volumes:
-      - './pihole/pihole:/etc/pihole'
-      - './pihole/dnsmasq.d:/etc/dnsmasq.d'
+      - ./pihole/pihole:/etc/pihole
+      - ./pihole/dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - SYS_TIME
       - SYS_NICE
@@ -25,18 +24,18 @@ services:
   unbound:
     container_name: ${UNBOUND_CONTAINER_NAME}
     image: ${UNBOUND_IMAGE}
-    privileged: true
     ports:
       - "${UNBOUND_PORT}:53/tcp"
       - "${UNBOUND_PORT}:53/udp"
     networks:
-      frontend:
+      - proxy_net
     volumes:
-      - './unbound:/opt/unbound/etc/unbound/'
+      - ./unbound:/opt/unbound/etc/unbound
     restart: unless-stopped
 
-
 networks:
-  default:
-    external:
-      name: proxy_net
+  pi_net:
+    external: true
+
+  proxy_net:
+    external: true

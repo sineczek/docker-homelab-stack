@@ -29,26 +29,19 @@ services:
     environment:
       - TZ=Europe/Warsaw
 
-      # Nginx UI ma edytować konfigurację z tej ścieżki (hostowe ./config podpięte poniżej)
       - NGINX_UI_NGINX_CONFIG_DIR=/data/prod-nginx
 
-      # Container Control: sterowanie nginxem w INNYM kontenerze po docker.sock
       - NGINX_UI_NGINX_CONTAINER_NAME=nginx
 
-      # (opcjonalnie, ale sensowne) PID nginx w oficjalnym nginx to /var/run/nginx.pid
       - NGINX_UI_NGINX_PID_PATH=/var/run/nginx.pid
     volumes:
-      # STAN nginx-ui (DB / ustawienia)
       - ./nginx-ui:/etc/nginx-ui
 
-      # Produkcyjny config nginx (RW dla UI) pod INNĄ ścieżką:
       - ./config:/data/prod-nginx:rw
 
-      # certy/sekrety do podglądu (RO)
       - ./certs:/etc/letsencrypt:ro
       - ./secrets:/etc/nginx/secrets:ro
 
-      # wymagane do Container Control
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_net
@@ -75,7 +68,6 @@ services:
     volumes:
       - ./certs:/etc/letsencrypt
       - ./cloudflare/cloudflare.ini:/cloudflare.ini:ro
-    # entrypoint: /bin/sh
     networks:
       - proxy_net
 
@@ -87,15 +79,14 @@ services:
     depends_on:
       - nginx
       - nginx-ui
-    # współdzielona przestrzeń sieciowa z nginx-ui -> 127.0.0.1 jest wspólne
-    network_mode: "service:nginx-ui"
+    networks:
+      - proxy_net
     command: "tcp-listen:51820,fork,reuseaddr tcp-connect:nginx:51820"
 
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          # sprawdź połączenie TCP do backendu (nginx:51820) z timeoutem
           "socat - TCP4:nginx:51820,connect-timeout=2 </dev/null >/dev/null 2>&1"
         ]
       interval: 30s

@@ -127,8 +127,6 @@ services:
 
   pihole-exporter-1:
     image: local/pihole-exporter:hc
-    build:
-      context: ./images/pihole-exporter
     container_name: pihole-exporter-1
     restart: unless-stopped
     environment:
@@ -145,19 +143,23 @@ services:
       start_period: 40s
       retries: 5
 
-  pihole-exporter-2:
-    image: local/pihole-exporter:hc
-    container_name: pihole-exporter-2
+  
+  pihole6-exporter-2:
+    build:
+      context: ./images/pihole6-exporter
+    container_name: pihole6-exporter-2
     restart: unless-stopped
     environment:
-      PIHOLE_HOSTNAME: ${PIHOLE2_URL}
-      PIHOLE_PASSWORD: ${PIHOLE_PASSWORD}
-      INTERVAL: "30s"
-      PORT: "9617"
+      PH_HOST: ${PH_HOST}
+      PH_KEY:  ${PH_KEY}
+      PH_PORT: ${PH_PORT}
     networks:
-      - monitoring
+      monitoring: {}
+
+      pi_net:
+        ipv4_address: 192.168.4.221
     healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:9617/metrics"]
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9666/metrics"]
       interval: 30s
       timeout: 5s
       start_period: 40s
@@ -203,7 +205,9 @@ services:
       retries: 5
 
   pve-exporter:
-    image: prompve/prometheus-pve-exporter:latest
+    image: local/pve-exporter:hc
+    build:
+      context: ./images/pve-exporter
     container_name: pve-exporter
     restart: unless-stopped
     command: ["--config.file=/etc/prometheus/pve.yml"]
@@ -212,18 +216,23 @@ services:
     networks:
       - monitoring
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'python3 -c "import socket,sys; s=socket.socket(); s.settimeout(2); s.connect((''127.0.0.1'',9221)); s.close()"',
-        ]
+      #test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9221/metrics"]
+      
+      test: [
+        "CMD",
+        "python",
+        "-c",
+        "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:9221/metrics', timeout=3).status==200 else 1)"
+      ]
       interval: 30s
       timeout: 5s
       start_period: 30s
       retries: 5
 
   ssl-exporter:
-    image: ribbybibby/ssl-exporter:latest
+    image: local/ssl-exporter:hc
+    build:
+      context: ./images/ssl-exporter
     container_name: ssl-exporter
     restart: unless-stopped
     command: ["--config.file=/etc/ssl-exporter/ssl_exporter.yml"]
@@ -232,9 +241,17 @@ services:
     networks:
       - monitoring
       - proxy_net
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9219/metrics"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
 
   blackbox-exporter:
-    image: prom/blackbox-exporter:latest
+    image: local/blackbox-exporter:hc
+    build:
+      context: ./images/blackbox-exporter
     container_name: blackbox-exporter
     restart: unless-stopped
     command: ["--config.file=/etc/blackbox/blackbox.yml"]
@@ -244,35 +261,51 @@ services:
       - monitoring
       - proxy_net
     healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:9115/metrics"]
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9115/metrics"]
       interval: 30s
       timeout: 5s
       start_period: 30s
       retries: 5
 
   alertmanager:
-    image: prom/alertmanager:latest
-    container_name: alertmanager
+    image: local/alertmanager:hc
+    build:
+      context: ./images/alertmanager
     restart: unless-stopped
-    command:
-      - --config.file=/etc/alertmanager/alertmanager.yml
-      - --storage.path=/alertmanager
+    environment:
+      AM_SMTP_HOST: "${AM_SMTP_HOST}"
+      AM_SMTP_FROM: "${AM_SMTP_FROM}"
+      AM_SMTP_TO:   "${AM_SMTP_TO}" 
+      AM_TG_BOT_TOKEN: "${AM_TG_BOT_TOKEN}"
+      AM_TG_CHAT_ID:   "${AM_TG_CHAT_ID}"
     networks:
       - monitoring
       - proxy_net
     volumes:
       - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
       - ./alertmanager/templates:/etc/alertmanager/templates:ro
+      - alertmanager_data:/var/lib/alertmanager
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9093/-/healthy"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
 
 networks:
   monitoring:
     driver: bridge
   proxy_net:
+    external: true  
+  pi_net:
     external: true
+    name: pi_net
+
 
 volumes:
   prometheus_data:
   grafana_data:
+  alertmanager_data:
 
 secrets:
   postgres_dsn:
