@@ -1,8 +1,3 @@
-# It’s a Git pre-commit hook that scans Docker Compose files for hardcoded sensitive values like 
-# passwords or API keys and prevents commits if any are found. 
-# It ensures that secrets are kept in environment variables or .env files, helping maintain 
-# secure configuration practices.
-
 #!/usr/bin/env python3
 import os
 import sys

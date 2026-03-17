@@ -48,7 +48,7 @@ Make sure the configuration file contains a valid `server` block and points to t
 Create (or update) a symbolic link from `sites-available` to `sites-enabled`:
 
 ```
-ln -sf /opt/docker_volumes/nginx/config/sites-available/example.conf \
+ln -sf ../sites-available/example.conf \
        /opt/docker_volumes/nginx/config/sites-enabled/example.conf
 ```
 
